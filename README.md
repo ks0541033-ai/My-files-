@@ -1,9 +1,104 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title> My Files </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANEL AD SALE</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1> My Files </h1>
-<p> WELCOME TO FF PANNEL </p>
+
+    <!-- ================= POPUP ================= -->
+    <div class="popup-overlay" id="salePopup">
+        <div class="sale-popup">
+            <button class="close-btn" id="closePopup">&times;</button>
+
+            <div class="popup-glow"></div>
+
+            <h1>PANEL AD SALE</h1>
+            <p>Premium Panel Collection</p>
+
+            <button class="enter-btn" id="enterBtn">
+                ENTER NOW
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ================= MAIN WEBSITE ================= -->
+    <main class="container">
+
+        <header class="header">
+            <div class="small-title">PREMIUM COLLECTION</div>
+            <h2>PANEL <span>AD</span> SALE</h2>
+            <p>Select your panel</p>
+        </header>
+
+
+        <section class="panel-list">
+
+            <!-- VIP PANEL -->
+            <a class="panel-card vip"
+               href="files/vip-panel.pdf"
+               target="_blank">
+
+                <div class="card-number">01</div>
+
+                <div class="card-content">
+                    <h3>VIP PANEL</h3>
+                    <p>Premium Panel</p>
+                </div>
+
+                <div class="price">₹1500</div>
+
+                <div class="arrow">→</div>
+            </a>
+
+
+            <!-- LOCATION PANEL -->
+            <a class="panel-card location"
+               href="files/location-panel.pdf"
+               target="_blank">
+
+                <div class="card-number">02</div>
+
+                <div class="card-content">
+                    <h3>LOCATION PANEL</h3>
+                    <p>Location Panel</p>
+                </div>
+
+                <div class="price">₹1000</div>
+
+                <div class="arrow">→</div>
+            </a>
+
+
+            <!-- BRUTAL PANEL -->
+            <a class="panel-card brutal"
+               href="files/brutal-panel.pdf"
+               target="_blank">
+
+                <div class="card-number">03</div>
+
+                <div class="card-content">
+                    <h3>BRUTAL PANEL</h3>
+                    <p>Premium Collection</p>
+                </div>
+
+                <div class="price">₹2500</div>
+
+                <div class="arrow">→</div>
+            </a>
+
+        </section>
+
+
+        <footer>
+            <p>© 2026 PANEL AD SALE • Premium Collection</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
