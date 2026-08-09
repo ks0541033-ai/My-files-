@@ -1,462 +1,339 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-    background: #000;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-}
-
-
-/* ================= MAIN ================= */
-
-.container {
-    width: min(920px, 92%);
-    margin: auto;
-    padding: 55px 0 30px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.small-title {
-    color: #aaa;
-    font-size: 11px;
-    letter-spacing: 4px;
-    margin-bottom: 12px;
-}
-
-.header h2 {
-    font-size: clamp(30px, 8vw, 60px);
-    font-weight: 900;
-    letter-spacing: 3px;
-}
-
-.header h2 span {
-    color: #baff00;
-}
-
-.header p {
-    color: #777;
-    margin-top: 10px;
-}
-
-
-/* ================= CARDS ================= */
-
-.panel-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.panel-card {
-    position: relative;
-    min-height: 125px;
-    padding: 25px 30px;
-    border-radius: 22px;
-    text-decoration: none;
-    color: white;
-
-    display: flex;
-    align-items: center;
-    gap: 22px;
-
-    background:
-        linear-gradient(110deg,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0.015));
-
-    border: 1px solid rgba(255,255,255,0.12);
-
-    overflow: hidden;
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-
-    animation: breathingGlow 3s ease-in-out infinite;
-}
-
-
-/* Different card glow */
-
-.vip {
-    --glow: rgba(170, 255, 0, 0.55);
-}
-
-.location {
-    --glow: rgba(255, 220, 0, 0.55);
-    animation-delay: .7s;
-}
-
-.brutal {
-    --glow: rgba(0, 255, 150, 0.55);
-    animation-delay: 1.4s;
-}
-
-
-.panel-card::before {
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    background: var(--glow);
-    filter: blur(100px);
-    opacity: 0.12;
-    right: -100px;
-    top: -100px;
-    pointer-events: none;
-}
-
-
-.panel-card:hover {
-    transform: translateY(-5px) scale(1.015);
-    border-color: var(--glow);
-    box-shadow:
-        0 0 20px var(--glow),
-        0 0 50px rgba(255,255,255,0.04);
-}
-
-
-.panel-card:active {
-    transform: scale(0.97);
-}
-
-
-/* ================= CARD CONTENT ================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.card-number {
-    font-size: 13px;
-    color: #666;
-    min-width: 30px;
-}
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="Premium Panel Collection">
 
-.card-content {
-    flex: 1;
-}
+    <title>PANEL AD SALE — Premium Collection</title>
 
-.card-content h3 {
-    font-size: clamp(17px, 4vw, 25px);
-    letter-spacing: 1px;
-    font-weight: 800;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.card-content p {
-    color: #777;
-    font-size: 12px;
-    margin-top: 7px;
-}
+<body>
 
-.price {
-    font-size: clamp(18px, 5vw, 26px);
-    font-weight: 900;
-    color: #caff00;
-    white-space: nowrap;
-}
+    <!-- ================= BACKGROUND EFFECT ================= -->
 
-.arrow {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    <div class="background-effects">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="grid"></div>
+    </div>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    background: rgba(255,255,255,0.07);
-    color: #fff;
-    font-size: 22px;
+    <!-- ================= POPUP ================= -->
 
-    transition: 0.3s ease;
-}
+    <div class="popup-overlay" id="salePopup">
 
-.panel-card:hover .arrow {
-    background: #fff;
-    color: #000;
-    transform: translateX(4px);
-}
+        <div class="sale-popup">
 
+            <button
+                class="close-btn"
+                id="closePopup"
+                aria-label="Close">
+                &times;
+            </button>
 
-/* ================= GLOW ================= */
+            <div class="popup-badge">
+                ✦ LIMITED ACCESS ✦
+            </div>
 
-@keyframes breathingGlow {
+            <div class="popup-glow"></div>
 
-    0%, 100% {
-        box-shadow:
-            0 0 5px transparent,
-            0 0 15px transparent;
-    }
+            <h1>PANEL<br><span>AD SALE</span></h1>
 
-    50% {
-        box-shadow:
-            0 0 12px var(--glow),
-            0 0 30px rgba(255,255,255,0.03);
-    }
-}
+            <p>
+                Premium panels.<br>
+                Exclusive collection.
+            </p>
 
+            <button class="enter-btn" id="enterBtn">
+                <span>ENTER COLLECTION</span>
+                <strong>→</strong>
+            </button>
 
-/* ================= FOOTER ================= */
+        </div>
 
-footer {
-    text-align: center;
-    margin-top: 45px;
-    color: #444;
-    font-size: 11px;
-}
+    </div>
 
 
-/* ================= POPUP ================= */
+    <!-- ================= MAIN WEBSITE ================= -->
 
-.popup-overlay {
-    position: fixed;
-    inset: 0;
+    <main class="container">
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        <!-- HEADER -->
 
-    padding: 20px;
+        <header class="header">
 
-    background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(12px);
+            <div class="top-line">
+                <span class="status-dot"></span>
+                PREMIUM COLLECTION
+            </div>
 
-    z-index: 9999;
-}
+            <div class="brand">
+                PANEL
+                <span>AD</span>
+                SALE
+            </div>
 
+            <p class="tagline">
+                Choose your panel and explore the collection.
+            </p>
 
-.sale-popup {
-    --popup-color: #baff00;
+        </header>
 
-    position: relative;
-    width: min(550px, 100%);
-    padding: 65px 30px 45px;
 
-    text-align: center;
+        <!-- ================= PANEL CARDS ================= -->
 
-    border-radius: 30px;
+        <section class="panel-section">
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.10),
-            rgba(255,255,255,0.025)
-        );
+            <div class="section-heading">
 
-    border: 1px solid var(--popup-color);
+                <div>
+                    <span class="section-label">AVAILABLE NOW</span>
+                    <h2>Choose Your Panel</h2>
+                </div>
 
-    box-shadow:
-        0 0 25px var(--popup-color),
-        0 0 80px rgba(0,0,0,0.9);
+                <span class="panel-count">03 OPTIONS</span>
 
-    animation:
-        popupIn .5s ease,
-        popupGlow 2s ease-in-out infinite;
-}
+            </div>
 
 
-.popup-glow {
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
+            <div class="panel-list">
 
-    background: var(--popup-color);
-    filter: blur(90px);
-    opacity: .18;
 
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+                <!-- VIP PANEL -->
 
-    pointer-events: none;
-}
+                <a
+                    class="panel-card vip"
+                    href="files/vip-panel.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
 
+                    <div class="card-left">
 
-.sale-popup h1 {
-    position: relative;
+                        <div class="card-number">
+                            01
+                        </div>
 
-    font-size: clamp(35px, 10vw, 70px);
-    line-height: 1;
-    font-weight: 1000;
+                        <div class="card-icon">
+                            ♛
+                        </div>
 
-    letter-spacing: 2px;
+                    </div>
 
-    color: #fff;
 
-    text-shadow:
-        0 0 10px var(--popup-color),
-        0 0 30px var(--popup-color);
-}
+                    <div class="card-content">
 
+                        <div class="card-top">
+                            <span class="category">
+                                PREMIUM
+                            </span>
 
-.sale-popup p {
-    position: relative;
-    color: #aaa;
-    margin-top: 18px;
-    letter-spacing: 2px;
-}
+                            <span class="available">
+                                ● AVAILABLE
+                            </span>
+                        </div>
 
+                        <h3>VIP PANEL</h3>
 
-.enter-btn {
-    position: relative;
+                        <p>
+                            Premium panel collection
+                        </p>
 
-    margin-top: 30px;
+                    </div>
 
-    border: none;
-    border-radius: 50px;
 
-    padding: 15px 35px;
+                    <div class="card-right">
 
-    background: var(--popup-color);
-    color: #000;
+                        <div class="price-label">
+                            STARTING
+                        </div>
 
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1px;
+                        <div class="price">
+                            ₹1500
+                        </div>
 
-    cursor: pointer;
+                        <div class="arrow">
+                            →
+                        </div>
 
-    box-shadow: 0 0 20px var(--popup-color);
+                    </div>
 
-    transition: .25s ease;
-}
+                </a>
 
-.enter-btn:hover {
-    transform: scale(1.07);
-}
 
 
-.close-btn {
-    position: absolute;
+                <!-- LOCATION PANEL -->
 
-    top: 15px;
-    right: 18px;
+                <a
+                    class="panel-card location"
+                    href="files/location-panel.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
 
-    width: 38px;
-    height: 38px;
+                    <div class="card-left">
 
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.2);
+                        <div class="card-number">
+                            02
+                        </div>
 
-    background: rgba(255,255,255,.05);
+                        <div class="card-icon">
+                            ◉
+                        </div>
 
-    color: #fff;
-    font-size: 25px;
+                    </div>
 
-    cursor: pointer;
 
-    z-index: 5;
-}
+                    <div class="card-content">
 
+                        <div class="card-top">
+                            <span class="category">
+                                LOCATION
+                            </span>
 
-@keyframes popupIn {
-    from {
-        opacity: 0;
-        transform: scale(.75);
-    }
+                            <span class="available">
+                                ● AVAILABLE
+                            </span>
+                        </div>
 
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+                        <h3>LOCATION PANEL</h3>
 
+                        <p>
+                            Location panel collection
+                        </p>
 
-@keyframes popupGlow {
-    0%, 100% {
-        box-shadow:
-            0 0 20px var(--popup-color),
-            0 0 50px rgba(0,0,0,.8);
-    }
+                    </div>
 
-    50% {
-        box-shadow:
-            0 0 45px var(--popup-color),
-            0 0 100px rgba(0,0,0,.9);
-    }
-}
 
+                    <div class="card-right">
 
-/* ================= MOBILE ================= */
+                        <div class="price-label">
+                            STARTING
+                        </div>
 
-@media (max-width: 600px) {
+                        <div class="price">
+                            ₹1000
+                        </div>
 
-    .container {
-        width: 92%;
-        padding-top: 35px;
-    }
+                        <div class="arrow">
+                            →
+                        </div>
 
-    .panel-card {
-        min-height: 105px;
-        padding: 20px 17px;
-        gap: 12px;
-        border-radius: 18px;
-    }
+                    </div>
 
-    .card-number {
-        min-width: 20px;
-        font-size: 10px;
-    }
+                </a>
 
-    .card-content h3 {
-        font-size: 15px;
-    }
 
-    .card-content p {
-        font-size: 10px;
-    }
 
-    .price {
-        font-size: 16px;
-    }
+                <!-- BRUTAL PANEL -->
 
-    .arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 17px;
-    }
+                <a
+                    class="panel-card brutal"
+                    href="files/brutal-panel.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
 
-    .sale-popup {
-        padding: 55px 20px 35px;
-        border-radius: 24px;
-    }
+                    <div class="card-left">
 
-    .sale-popup h1 {
-        font-size: 39px;
-    }
-}
+                        <div class="card-number">
+                            03
+                        </div>
 
+                        <div class="card-icon">
+                            ⚡
+                        </div>
 
-/* Very small phones */
+                    </div>
 
-@media (max-width: 360px) {
 
-    .panel-card {
-        padding: 17px 12px;
-        gap: 8px;
-    }
+                    <div class="card-content">
 
-    .price {
-        font-size: 14px;
-    }
+                        <div class="card-top">
+                            <span class="category">
+                                EXCLUSIVE
+                            </span>
 
-    .arrow {
-        width: 30px;
-        height: 30px;
-    }
+                            <span class="available">
+                                ● AVAILABLE
+                            </span>
+                        </div>
 
-}
+                        <h3>BRUTAL PANEL</h3>
+
+                        <p>
+                            Exclusive premium collection
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-right">
+
+                        <div class="price-label">
+                            STARTING
+                        </div>
+
+                        <div class="price">
+                            ₹2500
+                        </div>
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BOTTOM INFO ================= -->
+
+        <div class="bottom-info">
+
+            <div>
+                <span class="info-icon">✓</span>
+                Premium Collection
+            </div>
+
+            <div>
+                <span class="info-icon">⚡</span>
+                Instant Access
+            </div>
+
+            <div>
+                <span class="info-icon">◆</span>
+                Mobile Friendly
+            </div>
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <div class="footer-brand">
+                PANEL AD SALE
+            </div>
+
+            <p>
+                © 2026 Panel Ad Sale. All rights reserved.
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+                            </html>
