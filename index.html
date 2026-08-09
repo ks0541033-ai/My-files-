@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Background glow effects */
+        /* Background glow */
         body::before {
             content: '';
             position: fixed;
@@ -34,7 +34,117 @@
             pointer-events: none;
         }
 
-        /* ===== TOP SALE POPUP ===== */
+        /* ===================== LOGIN PAGE ===================== */
+        #loginPage {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #loginPage.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 193, 7, 0.25);
+            border-radius: 24px;
+            padding: 45px 40px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 35px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+
+        .error-msg {
+            color: #ff5252;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* ===================== MAIN WEBSITE ===================== */
+        #mainWebsite {
+            display: none;
+        }
+
+        #mainWebsite.show {
+            display: block;
+        }
+
+        /* Top Sale Popup */
         .sale-popup {
             position: fixed;
             top: 0;
@@ -63,7 +173,6 @@
             font-size: 12px;
             padding: 4px 12px;
             border-radius: 20px;
-            letter-spacing: 0.5px;
         }
 
         .sale-content {
@@ -108,14 +217,13 @@
             color: #aaa;
             font-size: 22px;
             cursor: pointer;
-            transition: color 0.3s;
         }
 
         .close-popup:hover {
             color: #fff;
         }
 
-        /* ===== HEADER ===== */
+        /* Header */
         header {
             padding: 100px 20px 40px;
             text-align: center;
@@ -128,7 +236,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
 
         .tagline {
@@ -137,7 +244,7 @@
             font-weight: 300;
         }
 
-        /* ===== PANELS GRID ===== */
+        /* Panels */
         .panels-container {
             max-width: 1200px;
             margin: 0 auto 80px;
@@ -154,7 +261,6 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
             transition: all 0.4s ease;
-            position: relative;
         }
 
         .panel-card:hover {
@@ -171,7 +277,6 @@
             justify-content: center;
             font-size: 3.5rem;
             position: relative;
-            overflow: hidden;
         }
 
         .panel-image::after {
@@ -192,7 +297,6 @@
             color: #ffc107;
             outline: none;
             border-bottom: 1px dashed transparent;
-            transition: border 0.3s;
             cursor: text;
         }
 
@@ -237,7 +341,6 @@
             border-radius: 12px;
         }
 
-        /* Upload Area */
         .upload-area {
             border: 2px dashed rgba(255, 255, 255, 0.15);
             border-radius: 12px;
@@ -297,7 +400,6 @@
             box-shadow: 0 8px 25px rgba(255, 193, 7, 0.45);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -306,144 +408,201 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        footer a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-
-        /* Animations */
         @keyframes slideDown {
             from { transform: translateY(-100%); }
             to { transform: translateY(0); }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .logo { font-size: 2.1rem; }
             header { padding-top: 90px; }
-            .sale-popup { padding: 10px 40px 10px 15px; }
-            .sale-content { gap: 8px; }
+            .login-box { padding: 35px 25px; margin: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== TOP SALE POPUP ===== -->
-    <div class="sale-popup" id="salePopup">
-        <div class="sale-content">
-            <span class="sale-badge">HOT SALE</span>
-            <div class="sale-text">
-                <strong>Diamond Panel Pro</strong> is on sale — Get it now at special price!
+    <!-- ===================== LOGIN PAGE ===================== -->
+    <div id="loginPage">
+        <div class="login-box">
+            <div class="login-logo">FREE FIRE ELITE</div>
+            <p class="login-subtitle">Enter your credentials to access the store</p>
+
+            <div class="input-group">
+                <label>User ID</label>
+                <input type="text" id="userId" placeholder="Enter your ID" autocomplete="off">
             </div>
-            <button class="sale-btn" onclick="scrollToPanel(1)">Grab Deal</button>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+
+            <button class="login-btn" onclick="checkLogin()">Login to Store</button>
+
+            <p class="error-msg" id="errorMsg">Incorrect ID or Password. Please try again.</p>
         </div>
-        <button class="close-popup" onclick="closePopup()">×</button>
     </div>
 
-    <!-- ===== HEADER ===== -->
-    <header>
-        <div class="logo">FREE FIRE ELITE</div>
-        <p class="tagline">Premium Panels • Instant Delivery • Trusted by Thousands</p>
-    </header>
+    <!-- ===================== MAIN WEBSITE ===================== -->
+    <div id="mainWebsite">
 
-    <!-- ===== THREE PANELS ===== -->
-    <div class="panels-container">
-
-        <!-- PANEL 1 -->
-        <div class="panel-card" id="panel1">
-            <div class="panel-image">🔥</div>
-            <div class="panel-body">
-                <h3 class="panel-title" contenteditable="true">Diamond Panel Pro</h3>
-                <p class="panel-desc">Ultimate diamond generator with auto-claim and multi-account support. Instant activation.</p>
-                
-                <div class="price-row">
-                    <span class="current-price">₹299</span>
-                    <span class="old-price">₹599</span>
-                    <span class="discount">50% OFF</span>
+        <!-- Top Sale Popup -->
+        <div class="sale-popup" id="salePopup">
+            <div class="sale-content">
+                <span class="sale-badge">HOT SALE</span>
+                <div class="sale-text">
+                    <strong>Diamond Panel Pro</strong> is on sale — Get it now at special price!
                 </div>
-
-                <div class="upload-area" id="upload1" onclick="document.getElementById('file1').click()">
-                    <div class="upload-icon">📦</div>
-                    <p>Click or drag ZIP file here</p>
-                    <div class="file-name" id="fileName1"></div>
-                    <input type="file" id="file1" accept=".zip" hidden onchange="handleFile(1)">
-                </div>
-
-                <button class="download-btn" id="download1" disabled>Upload ZIP First</button>
+                <button class="sale-btn" onclick="scrollToPanel(1)">Grab Deal</button>
             </div>
+            <button class="close-popup" onclick="closePopup()">×</button>
         </div>
 
-        <!-- PANEL 2 -->
-        <div class="panel-card" id="panel2">
-            <div class="panel-image">⚡</div>
-            <div class="panel-body">
-                <h3 class="panel-title" contenteditable="true">Elite Skin Unlocker</h3>
-                <p class="panel-desc">Unlock all premium skins, emotes and character packs permanently. Works on latest version.</p>
-                
-                <div class="price-row">
-                    <span class="current-price">₹399</span>
-                    <span class="old-price">₹799</span>
-                    <span class="discount">50% OFF</span>
-                </div>
+        <!-- Header -->
+        <header>
+            <div class="logo">FREE FIRE ELITE</div>
+            <p class="tagline">Premium Panels • Instant Delivery • Trusted by Thousands</p>
+        </header>
 
-                <div class="upload-area" id="upload2" onclick="document.getElementById('file2').click()">
-                    <div class="upload-icon">📦</div>
-                    <p>Click or drag ZIP file here</p>
-                    <div class="file-name" id="fileName2"></div>
-                    <input type="file" id="file2" accept=".zip" hidden onchange="handleFile(2)">
-                </div>
+        <!-- Three Panels -->
+        <div class="panels-container">
 
-                <button class="download-btn" id="download2" disabled>Upload ZIP First</button>
+            <!-- PANEL 1 -->
+            <div class="panel-card" id="panel1">
+                <div class="panel-image">🔥</div>
+                <div class="panel-body">
+                    <h3 class="panel-title" contenteditable="true">Diamond Panel Pro</h3>
+                    <p class="panel-desc">Ultimate diamond generator with auto-claim and multi-account support. Instant activation.</p>
+                    
+                    <div class="price-row">
+                        <span class="current-price">₹299</span>
+                        <span class="old-price">₹599</span>
+                        <span class="discount">50% OFF</span>
+                    </div>
+
+                    <div class="upload-area" id="upload1" onclick="document.getElementById('file1').click()">
+                        <div class="upload-icon">📦</div>
+                        <p>Click or drag ZIP file here</p>
+                        <div class="file-name" id="fileName1"></div>
+                        <input type="file" id="file1" accept=".zip" hidden onchange="handleFile(1)">
+                    </div>
+
+                    <button class="download-btn" id="download1" disabled>Upload ZIP First</button>
+                </div>
             </div>
+
+            <!-- PANEL 2 -->
+            <div class="panel-card" id="panel2">
+                <div class="panel-image">⚡</div>
+                <div class="panel-body">
+                    <h3 class="panel-title" contenteditable="true">Elite Skin Unlocker</h3>
+                    <p class="panel-desc">Unlock all premium skins, emotes and character packs permanently. Works on latest version.</p>
+                    
+                    <div class="price-row">
+                        <span class="current-price">₹399</span>
+                        <span class="old-price">₹799</span>
+                        <span class="discount">50% OFF</span>
+                    </div>
+
+                    <div class="upload-area" id="upload2" onclick="document.getElementById('file2').click()">
+                        <div class="upload-icon">📦</div>
+                        <p>Click or drag ZIP file here</p>
+                        <div class="file-name" id="fileName2"></div>
+                        <input type="file" id="file2" accept=".zip" hidden onchange="handleFile(2)">
+                    </div>
+
+                    <button class="download-btn" id="download2" disabled>Upload ZIP First</button>
+                </div>
+            </div>
+
+            <!-- PANEL 3 -->
+            <div class="panel-card" id="panel3">
+                <div class="panel-image">👑</div>
+                <div class="panel-body">
+                    <h3 class="panel-title" contenteditable="true">VIP Max Panel</h3>
+                    <p class="panel-desc">All-in-one VIP panel with aimbot, wallhack toggle, and unlimited resources. Fully undetected.</p>
+                    
+                    <div class="price-row">
+                        <span class="current-price">₹499</span>
+                        <span class="old-price">₹999</span>
+                        <span class="discount">50% OFF</span>
+                    </div>
+
+                    <div class="upload-area" id="upload3" onclick="document.getElementById('file3').click()">
+                        <div class="upload-icon">📦</div>
+                        <p>Click or drag ZIP file here</p>
+                        <div class="file-name" id="fileName3"></div>
+                        <input type="file" id="file3" accept=".zip" hidden onchange="handleFile(3)">
+                    </div>
+
+                    <button class="download-btn" id="download3" disabled>Upload ZIP First</button>
+                </div>
+            </div>
+
         </div>
 
-        <!-- PANEL 3 -->
-        <div class="panel-card" id="panel3">
-            <div class="panel-image">👑</div>
-            <div class="panel-body">
-                <h3 class="panel-title" contenteditable="true">VIP Max Panel</h3>
-                <p class="panel-desc">All-in-one VIP panel with aimbot, wallhack toggle, and unlimited resources. Fully undetected.</p>
-                
-                <div class="price-row">
-                    <span class="current-price">₹499</span>
-                    <span class="old-price">₹999</span>
-                    <span class="discount">50% OFF</span>
-                </div>
-
-                <div class="upload-area" id="upload3" onclick="document.getElementById('file3').click()">
-                    <div class="upload-icon">📦</div>
-                    <p>Click or drag ZIP file here</p>
-                    <div class="file-name" id="fileName3"></div>
-                    <input type="file" id="file3" accept=".zip" hidden onchange="handleFile(3)">
-                </div>
-
-                <button class="download-btn" id="download3" disabled>Upload ZIP First</button>
-            </div>
-        </div>
-
+        <footer>
+            <p>© 2026 Free Fire Elite Panels. All rights reserved.</p>
+            <p style="margin-top: 8px;">Made with ❤️ for the Free Fire community</p>
+        </footer>
     </div>
-
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <p>© 2026 Free Fire Elite Panels. All rights reserved.</p>
-        <p style="margin-top: 8px;">Made with ❤️ for the Free Fire community</p>
-    </footer>
 
     <script>
-        // Store uploaded files
+        // ===================== CHANGE CREDENTIALS HERE =====================
+        const CORRECT_ID = "admin";
+        const CORRECT_PASSWORD = "freefire2026";
+        // ===================================================================
+
+        // Check if already logged in
+        window.onload = function() {
+            if (localStorage.getItem("ff_logged_in") === "true") {
+                showMainWebsite();
+            }
+        };
+
+        function checkLogin() {
+            const userId = document.getElementById("userId").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (userId === CORRECT_ID && password === CORRECT_PASSWORD) {
+                localStorage.setItem("ff_logged_in", "true");
+                showMainWebsite();
+            } else {
+                document.getElementById("errorMsg").style.display = "block";
+                // Shake animation effect
+                const box = document.querySelector(".login-box");
+                box.style.animation = "none";
+                setTimeout(() => {
+                    box.style.animation = "shake 0.4s ease";
+                }, 10);
+            }
+        }
+
+        function showMainWebsite() {
+            document.getElementById("loginPage").classList.add("hidden");
+            document.getElementById("mainWebsite").classList.add("show");
+        }
+
+        // Allow Enter key to login
+        document.getElementById("password").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") checkLogin();
+        });
+        document.getElementById("userId").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") checkLogin();
+        });
+
+        // ===================== ORIGINAL WEBSITE FUNCTIONS =====================
         const files = { 1: null, 2: null, 3: null };
 
-        // Close top popup
         function closePopup() {
             document.getElementById('salePopup').classList.add('hidden');
         }
 
-        // Scroll to panel
         function scrollToPanel(id) {
             document.getElementById('panel' + id).scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Handle file upload
         function handleFile(id) {
             const input = document.getElementById('file' + id);
             const file = input.files[0];
@@ -457,12 +616,10 @@
 
             files[id] = file;
             
-            // Show file name
             const nameEl = document.getElementById('fileName' + id);
             nameEl.textContent = '✓ ' + file.name;
             nameEl.style.display = 'block';
 
-            // Activate download button
             const btn = document.getElementById('download' + id);
             btn.disabled = false;
             btn.classList.add('active');
@@ -470,50 +627,7 @@
             btn.onclick = () => downloadFile(id);
         }
 
-        // Download the uploaded file
         function downloadFile(id) {
             if (!files[id]) return;
             
-            const url = URL.createObjectURL(files[id]);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = files[id].name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // Drag and drop support
-        document.querySelectorAll('.upload-area').forEach((area, index) => {
-            const id = index + 1;
-
-            area.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                area.classList.add('dragover');
-            });
-
-            area.addEventListener('dragleave', () => {
-                area.classList.remove('dragover');
-            });
-
-            area.addEventListener('drop', (e) => {
-                e.preventDefault();
-                area.classList.remove('dragover');
-                
-                const file = e.dataTransfer.files[0];
-                if (file && file.name.toLowerCase().endsWith('.zip')) {
-                    const input = document.getElementById('file' + id);
-                    // Create a new FileList-like object
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    input.files = dataTransfer.files;
-                    handleFile(id);
-                } else {
-                    alert('Please drop a ZIP file only.');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            const url = 
