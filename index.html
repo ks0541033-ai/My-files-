@@ -3,337 +3,517 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Elite Panels | Premium Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <meta name="theme-color" content="#050505">
-    <meta name="description" content="Premium Panel Collection">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    <title>PANEL AD SALE — Premium Collection</title>
+        /* Background glow effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 193, 7, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 150, 255, 0.06) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        /* ===== TOP SALE POPUP ===== */
+        .sale-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #1a1a2e, #16213e, #0f3460);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            gap: 20px;
+            animation: slideDown 0.5s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .sale-popup.hidden {
+            display: none;
+        }
+
+        .sale-badge {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: #000;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .sale-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sale-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sale-text strong {
+            color: #ffc107;
+        }
+
+        .sale-btn {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sale-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .close-popup {
+            position: absolute;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-popup:hover {
+            color: #fff;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            padding: 100px 20px 40px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffc107, #ff9800, #ffc107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            color: #aaa;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* ===== PANELS GRID ===== */
+        .panels-container {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .panel-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .panel-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 193, 7, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 193, 7, 0.1);
+        }
+
+        .panel-image {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,15,0.8), transparent);
+        }
+
+        .panel-body {
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffc107;
+            outline: none;
+            border-bottom: 1px dashed transparent;
+            transition: border 0.3s;
+            cursor: text;
+        }
+
+        .panel-title:hover,
+        .panel-title:focus {
+            border-bottom: 1px dashed rgba(255, 193, 7, 0.5);
+        }
+
+        .panel-desc {
+            color: #bbb;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            color: #777;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            margin-bottom: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        .upload-area p {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 6px;
+        }
+
+        .upload-icon {
+            font-size: 1.6rem;
+            color: #ffc107;
+        }
+
+        .file-name {
+            font-size: 0.8rem;
+            color: #4caf50;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #333, #222);
+            color: #777;
+        }
+
+        .download-btn.active {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.3);
+        }
+
+        .download-btn.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.45);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 2.1rem; }
+            header { padding-top: 90px; }
+            .sale-popup { padding: 10px 40px 10px 15px; }
+            .sale-content { gap: 8px; }
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- ================= BACKGROUND EFFECT ================= -->
-
-    <div class="background-effects">
-        <div class="orb orb-one"></div>
-        <div class="orb orb-two"></div>
-        <div class="grid"></div>
-    </div>
-
-
-    <!-- ================= POPUP ================= -->
-
-    <div class="popup-overlay" id="salePopup">
-
-        <div class="sale-popup">
-
-            <button
-                class="close-btn"
-                id="closePopup"
-                aria-label="Close">
-                &times;
-            </button>
-
-            <div class="popup-badge">
-                ✦ LIMITED ACCESS ✦
+    <!-- ===== TOP SALE POPUP ===== -->
+    <div class="sale-popup" id="salePopup">
+        <div class="sale-content">
+            <span class="sale-badge">HOT SALE</span>
+            <div class="sale-text">
+                <strong>Diamond Panel Pro</strong> is on sale — Get it now at special price!
             </div>
-
-            <div class="popup-glow"></div>
-
-            <h1>PANEL<br><span>AD SALE</span></h1>
-
-            <p>
-                Premium panels.<br>
-                Exclusive collection.
-            </p>
-
-            <button class="enter-btn" id="enterBtn">
-                <span>ENTER COLLECTION</span>
-                <strong>→</strong>
-            </button>
-
+            <button class="sale-btn" onclick="scrollToPanel(1)">Grab Deal</button>
         </div>
-
+        <button class="close-popup" onclick="closePopup()">×</button>
     </div>
 
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="logo">FREE FIRE ELITE</div>
+        <p class="tagline">Premium Panels • Instant Delivery • Trusted by Thousands</p>
+    </header>
 
-    <!-- ================= MAIN WEBSITE ================= -->
+    <!-- ===== THREE PANELS ===== -->
+    <div class="panels-container">
 
-    <main class="container">
-
-        <!-- HEADER -->
-
-        <header class="header">
-
-            <div class="top-line">
-                <span class="status-dot"></span>
-                PREMIUM COLLECTION
-            </div>
-
-            <div class="brand">
-                PANEL
-                <span>AD</span>
-                SALE
-            </div>
-
-            <p class="tagline">
-                Choose your panel and explore the collection.
-            </p>
-
-        </header>
-
-
-        <!-- ================= PANEL CARDS ================= -->
-
-        <section class="panel-section">
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="section-label">AVAILABLE NOW</span>
-                    <h2>Choose Your Panel</h2>
+        <!-- PANEL 1 -->
+        <div class="panel-card" id="panel1">
+            <div class="panel-image">🔥</div>
+            <div class="panel-body">
+                <h3 class="panel-title" contenteditable="true">Diamond Panel Pro</h3>
+                <p class="panel-desc">Ultimate diamond generator with auto-claim and multi-account support. Instant activation.</p>
+                
+                <div class="price-row">
+                    <span class="current-price">₹299</span>
+                    <span class="old-price">₹599</span>
+                    <span class="discount">50% OFF</span>
                 </div>
 
-                <span class="panel-count">03 OPTIONS</span>
+                <div class="upload-area" id="upload1" onclick="document.getElementById('file1').click()">
+                    <div class="upload-icon">📦</div>
+                    <p>Click or drag ZIP file here</p>
+                    <div class="file-name" id="fileName1"></div>
+                    <input type="file" id="file1" accept=".zip" hidden onchange="handleFile(1)">
+                </div>
 
+                <button class="download-btn" id="download1" disabled>Upload ZIP First</button>
             </div>
-
-
-            <div class="panel-list">
-
-
-                <!-- VIP PANEL -->
-
-                <a
-                    class="panel-card vip"
-                    href="files/vip-panel.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <div class="card-left">
-
-                        <div class="card-number">
-                            01
-                        </div>
-
-                        <div class="card-icon">
-                            ♛
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-content">
-
-                        <div class="card-top">
-                            <span class="category">
-                                PREMIUM
-                            </span>
-
-                            <span class="available">
-                                ● AVAILABLE
-                            </span>
-                        </div>
-
-                        <h3>VIP PANEL</h3>
-
-                        <p>
-                            Premium panel collection
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-right">
-
-                        <div class="price-label">
-                            STARTING
-                        </div>
-
-                        <div class="price">
-                            ₹1500
-                        </div>
-
-                        <div class="arrow">
-                            →
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- LOCATION PANEL -->
-
-                <a
-                    class="panel-card location"
-                    href="files/location-panel.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <div class="card-left">
-
-                        <div class="card-number">
-                            02
-                        </div>
-
-                        <div class="card-icon">
-                            ◉
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-content">
-
-                        <div class="card-top">
-                            <span class="category">
-                                LOCATION
-                            </span>
-
-                            <span class="available">
-                                ● AVAILABLE
-                            </span>
-                        </div>
-
-                        <h3>LOCATION PANEL</h3>
-
-                        <p>
-                            Location panel collection
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-right">
-
-                        <div class="price-label">
-                            STARTING
-                        </div>
-
-                        <div class="price">
-                            ₹1000
-                        </div>
-
-                        <div class="arrow">
-                            →
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- BRUTAL PANEL -->
-
-                <a
-                    class="panel-card brutal"
-                    href="files/brutal-panel.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    <div class="card-left">
-
-                        <div class="card-number">
-                            03
-                        </div>
-
-                        <div class="card-icon">
-                            ⚡
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-content">
-
-                        <div class="card-top">
-                            <span class="category">
-                                EXCLUSIVE
-                            </span>
-
-                            <span class="available">
-                                ● AVAILABLE
-                            </span>
-                        </div>
-
-                        <h3>BRUTAL PANEL</h3>
-
-                        <p>
-                            Exclusive premium collection
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-right">
-
-                        <div class="price-label">
-                            STARTING
-                        </div>
-
-                        <div class="price">
-                            ₹2500
-                        </div>
-
-                        <div class="arrow">
-                            →
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= BOTTOM INFO ================= -->
-
-        <div class="bottom-info">
-
-            <div>
-                <span class="info-icon">✓</span>
-                Premium Collection
-            </div>
-
-            <div>
-                <span class="info-icon">⚡</span>
-                Instant Access
-            </div>
-
-            <div>
-                <span class="info-icon">◆</span>
-                Mobile Friendly
-            </div>
-
         </div>
 
+        <!-- PANEL 2 -->
+        <div class="panel-card" id="panel2">
+            <div class="panel-image">⚡</div>
+            <div class="panel-body">
+                <h3 class="panel-title" contenteditable="true">Elite Skin Unlocker</h3>
+                <p class="panel-desc">Unlock all premium skins, emotes and character packs permanently. Works on latest version.</p>
+                
+                <div class="price-row">
+                    <span class="current-price">₹399</span>
+                    <span class="old-price">₹799</span>
+                    <span class="discount">50% OFF</span>
+                </div>
 
-        <!-- ================= FOOTER ================= -->
+                <div class="upload-area" id="upload2" onclick="document.getElementById('file2').click()">
+                    <div class="upload-icon">📦</div>
+                    <p>Click or drag ZIP file here</p>
+                    <div class="file-name" id="fileName2"></div>
+                    <input type="file" id="file2" accept=".zip" hidden onchange="handleFile(2)">
+                </div>
 
-        <footer>
-
-            <div class="footer-brand">
-                PANEL AD SALE
+                <button class="download-btn" id="download2" disabled>Upload ZIP First</button>
             </div>
+        </div>
 
-            <p>
-                © 2026 Panel Ad Sale. All rights reserved.
-            </p>
+        <!-- PANEL 3 -->
+        <div class="panel-card" id="panel3">
+            <div class="panel-image">👑</div>
+            <div class="panel-body">
+                <h3 class="panel-title" contenteditable="true">VIP Max Panel</h3>
+                <p class="panel-desc">All-in-one VIP panel with aimbot, wallhack toggle, and unlimited resources. Fully undetected.</p>
+                
+                <div class="price-row">
+                    <span class="current-price">₹499</span>
+                    <span class="old-price">₹999</span>
+                    <span class="discount">50% OFF</span>
+                </div>
 
-        </footer>
+                <div class="upload-area" id="upload3" onclick="document.getElementById('file3').click()">
+                    <div class="upload-icon">📦</div>
+                    <p>Click or drag ZIP file here</p>
+                    <div class="file-name" id="fileName3"></div>
+                    <input type="file" id="file3" accept=".zip" hidden onchange="handleFile(3)">
+                </div>
 
-    </main>
+                <button class="download-btn" id="download3" disabled>Upload ZIP First</button>
+            </div>
+        </div>
 
+    </div>
 
-    <script src="script.js"></script>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>© 2026 Free Fire Elite Panels. All rights reserved.</p>
+        <p style="margin-top: 8px;">Made with ❤️ for the Free Fire community</p>
+    </footer>
 
+    <script>
+        // Store uploaded files
+        const files = { 1: null, 2: null, 3: null };
+
+        // Close top popup
+        function closePopup() {
+            document.getElementById('salePopup').classList.add('hidden');
+        }
+
+        // Scroll to panel
+        function scrollToPanel(id) {
+            document.getElementById('panel' + id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Handle file upload
+        function handleFile(id) {
+            const input = document.getElementById('file' + id);
+            const file = input.files[0];
+            
+            if (!file) return;
+
+            if (!file.name.toLowerCase().endsWith('.zip')) {
+                alert('Please upload a ZIP file only.');
+                return;
+            }
+
+            files[id] = file;
+            
+            // Show file name
+            const nameEl = document.getElementById('fileName' + id);
+            nameEl.textContent = '✓ ' + file.name;
+            nameEl.style.display = 'block';
+
+            // Activate download button
+            const btn = document.getElementById('download' + id);
+            btn.disabled = false;
+            btn.classList.add('active');
+            btn.textContent = 'Download ZIP';
+            btn.onclick = () => downloadFile(id);
+        }
+
+        // Download the uploaded file
+        function downloadFile(id) {
+            if (!files[id]) return;
+            
+            const url = URL.createObjectURL(files[id]);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = files[id].name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Drag and drop support
+        document.querySelectorAll('.upload-area').forEach((area, index) => {
+            const id = index + 1;
+
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('dragover');
+            });
+
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.name.toLowerCase().endsWith('.zip')) {
+                    const input = document.getElementById('file' + id);
+                    // Create a new FileList-like object
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+                    handleFile(id);
+                } else {
+                    alert('Please drop a ZIP file only.');
+                }
+            });
+        });
+    </script>
 </body>
-                            </html>
+</html>
