@@ -1,2 +1,144 @@
 <h1>My Files</h1> <p>Welcom to My pannel.</p>
 <button>Start</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Files</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .file-box {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 0 25px rgba(255,255,255,0.08);
+        }
+
+        .file-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .file-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .file-info {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.03);
+            background: #ddd;
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #555;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>My Files</h1>
+
+        <p class="subtitle">
+            Welcome to my download panel
+        </p>
+
+        <div class="file-box">
+
+            <div class="file-icon">
+                📦
+            </div>
+
+            <!-- अपनी file का नाम यहाँ लिखें -->
+            <div class="file-name">
+                myfile.zip
+            </div>
+
+            <div class="file-info">
+                ZIP File
+            </div>
+
+            <!-- अपनी file का exact नाम यहाँ लिखें -->
+            <a
+                class="download-btn"
+                href="myfile.zip"
+                download
+            >
+                ⬇ Download File
+            </a>
+
+        </div>
+
+        <div class="footer">
+            © 2026 My Files
+        </div>
+
+    </div>
+
+</body>
+</html>
