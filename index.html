@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Background glow */
         body::before {
             content: '';
             position: fixed;
@@ -34,7 +33,7 @@
             pointer-events: none;
         }
 
-        /* ===================== LOGIN PAGE ===================== */
+        /* ========== LOGIN PAGE ========== */
         #loginPage {
             position: fixed;
             inset: 0;
@@ -43,13 +42,10 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        #loginPage.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        #loginPage.hide {
+            display: none !important;
         }
 
         .login-box {
@@ -135,7 +131,7 @@
             display: none;
         }
 
-        /* ===================== MAIN WEBSITE ===================== */
+        /* ========== MAIN WEBSITE ========== */
         #mainWebsite {
             display: none;
         }
@@ -422,7 +418,7 @@
 </head>
 <body>
 
-    <!-- ===================== LOGIN PAGE ===================== -->
+    <!-- ========== LOGIN PAGE ========== -->
     <div id="loginPage">
         <div class="login-box">
             <div class="login-logo">FREE FIRE ELITE</div>
@@ -444,7 +440,7 @@
         </div>
     </div>
 
-    <!-- ===================== MAIN WEBSITE ===================== -->
+    <!-- ========== MAIN WEBSITE ========== -->
     <div id="mainWebsite">
 
         <!-- Top Sale Popup -->
@@ -518,116 +514,4 @@
 
             <!-- PANEL 3 -->
             <div class="panel-card" id="panel3">
-                <div class="panel-image">👑</div>
-                <div class="panel-body">
-                    <h3 class="panel-title" contenteditable="true">VIP Max Panel</h3>
-                    <p class="panel-desc">All-in-one VIP panel with aimbot, wallhack toggle, and unlimited resources. Fully undetected.</p>
-                    
-                    <div class="price-row">
-                        <span class="current-price">₹499</span>
-                        <span class="old-price">₹999</span>
-                        <span class="discount">50% OFF</span>
-                    </div>
-
-                    <div class="upload-area" id="upload3" onclick="document.getElementById('file3').click()">
-                        <div class="upload-icon">📦</div>
-                        <p>Click or drag ZIP file here</p>
-                        <div class="file-name" id="fileName3"></div>
-                        <input type="file" id="file3" accept=".zip" hidden onchange="handleFile(3)">
-                    </div>
-
-                    <button class="download-btn" id="download3" disabled>Upload ZIP First</button>
-                </div>
-            </div>
-
-        </div>
-
-        <footer>
-            <p>© 2026 Free Fire Elite Panels. All rights reserved.</p>
-            <p style="margin-top: 8px;">Made with ❤️ for the Free Fire community</p>
-        </footer>
-    </div>
-
-    <script>
-        // ===================== CHANGE CREDENTIALS HERE =====================
-        const CORRECT_ID = "admin";
-        const CORRECT_PASSWORD = "freefire2026";
-        // ===================================================================
-
-        // Check if already logged in
-        window.onload = function() {
-            if (localStorage.getItem("ff_logged_in") === "true") {
-                showMainWebsite();
-            }
-        };
-
-        function checkLogin() {
-            const userId = document.getElementById("userId").value.trim();
-            const password = document.getElementById("password").value;
-
-            if (userId === CORRECT_ID && password === CORRECT_PASSWORD) {
-                localStorage.setItem("ff_logged_in", "true");
-                showMainWebsite();
-            } else {
-                document.getElementById("errorMsg").style.display = "block";
-                // Shake animation effect
-                const box = document.querySelector(".login-box");
-                box.style.animation = "none";
-                setTimeout(() => {
-                    box.style.animation = "shake 0.4s ease";
-                }, 10);
-            }
-        }
-
-        function showMainWebsite() {
-            document.getElementById("loginPage").classList.add("hidden");
-            document.getElementById("mainWebsite").classList.add("show");
-        }
-
-        // Allow Enter key to login
-        document.getElementById("password").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") checkLogin();
-        });
-        document.getElementById("userId").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") checkLogin();
-        });
-
-        // ===================== ORIGINAL WEBSITE FUNCTIONS =====================
-        const files = { 1: null, 2: null, 3: null };
-
-        function closePopup() {
-            document.getElementById('salePopup').classList.add('hidden');
-        }
-
-        function scrollToPanel(id) {
-            document.getElementById('panel' + id).scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function handleFile(id) {
-            const input = document.getElementById('file' + id);
-            const file = input.files[0];
-            
-            if (!file) return;
-
-            if (!file.name.toLowerCase().endsWith('.zip')) {
-                alert('Please upload a ZIP file only.');
-                return;
-            }
-
-            files[id] = file;
-            
-            const nameEl = document.getElementById('fileName' + id);
-            nameEl.textContent = '✓ ' + file.name;
-            nameEl.style.display = 'block';
-
-            const btn = document.getElementById('download' + id);
-            btn.disabled = false;
-            btn.classList.add('active');
-            btn.textContent = 'Download ZIP';
-            btn.onclick = () => downloadFile(id);
-        }
-
-        function downloadFile(id) {
-            if (!files[id]) return;
-            
-            const url = 
+                <div class="panel-image">👑</div
