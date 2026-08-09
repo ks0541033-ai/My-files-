@@ -551,6 +551,8 @@
     </footer>
 
     <script>
+        let failedAttempts = 0;
+        
         // Login Authentication Logic with strict validation
         function handleLogin(e) {
             e.preventDefault();
@@ -570,9 +572,15 @@
                     overlay.style.display = 'none';
                 }, 400);
             } else {
-                // Common error message so password is not exposed
-                errorEl.textContent = "Invalid Free Fire ID or Password! (ID must be at least 5 digits, Password is 2026)";
-                errorEl.style.display = 'block';
+    failedAttempts++;
+    if (failedAttempts >= 3) {
+        errorEl.textContent = "ABBE LAUDDE ID PASS LEKE AAA !";
+    } else {
+        errorEl.textContent = "Invalid Free Fire ID or Password!";
+    }
+    errorEl.style.display = 'block';
+            }
+            
             }
         }
 
