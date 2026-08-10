@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; margin-top: 10px; display: none; }
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Fire Elite Panels | Premium Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -32,107 +47,6 @@
                         radial-gradient(circle at 70% 80%, rgba(0, 150, 255, 0.06) 0%, transparent 40%);
             z-index: -1;
             pointer-events: none;
-        }
-
-        /* ===== LOGIN MODAL OVERLAY ===== */
-        .login-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(15px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .login-card {
-            background: rgba(26, 26, 46, 0.7);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 24px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 193, 7, 0.1);
-            text-align: center;
-            position: relative;
-        }
-
-        .login-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffc107, #ff9800);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .login-subtitle {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: #ddd;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .input-group input:focus {
-            border-color: #ffc107;
-            background: rgba(255, 193, 7, 0.03);
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.15);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            background: linear-gradient(135deg, #ffc107, #ff9800);
-            color: #000;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.3);
-            margin-top: 10px;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.45);
-        }
-
-        .login-error {
-            color: #ff4d4d;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            display: none;
         }
 
         /* ===== TOP SALE POPUP ===== */
@@ -418,11 +332,6 @@
             to { transform: translateY(0); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .logo { font-size: 2.1rem; }
@@ -434,28 +343,7 @@
 </head>
 <body>
 
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-card">
-            <div class="login-logo">ELITE ACCESS</div>
-            <p class="login-subtitle">Enter your Free Fire ID & Password to Continue</p>
-            
-            <form onsubmit="handleLogin(event)">
-                <div class="input-group">
-                    <label for="ffId">Free Fire ID</label>
-                    <input type="text" id="ffID" placeholder="Enter your FF ID (e.g., 123456789)" required autocomplete="off">
-                </div>
-                
-                <div class="input-group">
-                    <label for="ffPass">Password</label>
-                    <input type="password" id="ffPass" placeholder="Enter password" required>
-                </div>
-
-                <button type="submit" class="login-btn">Login to Store</button>
-                <div class="login-error" id="loginError">Invalid Free Fire ID or Password!</div>
-            </form>
-        </div>
-    </div>
-
+    <!-- ===== TOP SALE POPUP ===== -->
     <div class="sale-popup" id="salePopup">
         <div class="sale-content">
             <span class="sale-badge">HOT SALE</span>
@@ -467,13 +355,16 @@
         <button class="close-popup" onclick="closePopup()">×</button>
     </div>
 
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="logo">FREE FIRE ELITE</div>
         <p class="tagline">Premium Panels • Instant Delivery • Trusted by Thousands</p>
     </header>
 
+    <!-- ===== THREE PANELS ===== -->
     <div class="panels-container">
 
+        <!-- PANEL 1 -->
         <div class="panel-card" id="panel1">
             <div class="panel-image">🔥</div>
             <div class="panel-body">
@@ -497,6 +388,7 @@
             </div>
         </div>
 
+        <!-- PANEL 2 -->
         <div class="panel-card" id="panel2">
             <div class="panel-image">⚡</div>
             <div class="panel-body">
@@ -520,6 +412,7 @@
             </div>
         </div>
 
+        <!-- PANEL 3 -->
         <div class="panel-card" id="panel3">
             <div class="panel-image">👑</div>
             <div class="panel-body">
@@ -545,45 +438,13 @@
 
     </div>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
         <p>© 2026 Free Fire Elite Panels. All rights reserved.</p>
         <p style="margin-top: 8px;">Made with ❤️ for the Free Fire community</p>
     </footer>
 
-    
-        let failedAttempts = 0;
-        
-        // Login Authentication Logic with strict validation
-        function handleLogin(e) {
-            e.preventDefault();
-            const id = document.getElementById('ffId').value.trim();
-            const pass = document.getElementById('ffPass').value.trim();
-            const errorEl = document.getElementById('loginError');
-
-            // Yahan check hoga ki ID khali na ho (aap chahe toh length ya specific IDs bhi set kar sakte hain)
-            // Aur password strictly "2026" hona chahiye
-            if (id.length >= 5 && pass === "2026") {
- {
-                // Successful login
-                const overlay = document.getElementById('loginOverlay');
-                overlay.style.opacity = '0';
-                overlay.style.transition = 'opacity 0.4s ease';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 400);
-            } else {
-    failedAttempts++;
-    if (failedAttempts >= 3) {
-        errorEl.textContent = "ABBE LAUDDE ID PASS LEKE AAA !";
-    } else {
-        errorEl.textContent = "Invalid Free Fire ID or Password!";
-    }
-    errorEl.style.display = 'block';
-            }
-            
-            }
-        }
-
+    <script>
         // Store uploaded files
         const files = { 1: null, 2: null, 3: null };
 
@@ -658,6 +519,7 @@
                 const file = e.dataTransfer.files[0];
                 if (file && file.name.toLowerCase().endsWith('.zip')) {
                     const input = document.getElementById('file' + id);
+                    // Create a new FileList-like object
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
                     input.files = dataTransfer.files;
@@ -669,4 +531,60 @@
         });
     </script>
 </body>
+</html>  </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="ffId">User ID</label>
+            <input type="text" id="ffId" required>
+        </div>
+        <div class="input-group">
+            <label for="ffPass">Password</label>
+            <input type="password" id="ffPass" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <div id="loginError" class="error"></div>
+</div>
+
+<script>
+    let failedAttempts = 0;
+    const maxAttempts = 3;
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const id = document.getElementById('ffId').value;
+        const pass = document.getElementById('ffPass').value;
+        const errorDiv = document.getElementById('loginError');
+
+        if (failedAttempts >= maxAttempts) {
+            errorDiv.textContent = "Try again later. Too many failed attempts.";
+            errorDiv.style.display = 'block';
+            return;
+        }
+
+        // यहाँ पर आईडी और पासवर्ड की जांच की जा रही है (उदाहरण के लिए "admin" और "password")
+        if (id === "admin" && pass === "password") {
+            alert("Login Successful!");
+            failedAttempts = 0; // सफल लॉगिन पर अटेम्प्ट रीसेट
+            errorDiv.style.display = 'none';
+        } else {
+            failedAttempts++;
+            if (failedAttempts >= maxAttempts) {
+                errorDiv.textContent = "Try again later. Too many failed attempts.";
+            } else {
+                errorDiv.textContent = "Invalid password and ID.";
+            }
+            errorDiv.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
 </html>
+
