@@ -1,198 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Facebook</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Helvetica, Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 30-Sec Clip Maker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
 
-    body {
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    .container {
-      display: flex;
-      width: 980px;
-      max-width: 95%;
-      justify-content: space-between;
-      align-items: center;
-      gap: 40px;
-    }
+        .container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    /* Left side */
-    .left {
-      flex: 1;
-      padding-right: 20px;
-    }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .left h1 {
-      color: #1877f2;
-      font-size: 60px;
-      font-weight: bold;
-      letter-spacing: -1px;
-      margin-bottom: 10px;
-    }
+        .subtitle {
+            text-align: center;
+            color: #a0aec0;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
 
-    .left p {
-      font-size: 28px;
-      line-height: 32px;
-      color: #1c1e21;
-      font-weight: normal;
-    }
+        .input-group {
+            margin-bottom: 25px;
+        }
 
-    /* Right side - Login card */
-    .login-card {
-      background: #fff;
-      width: 396px;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
 
-    .login-card input {
-      width: 100%;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      border: 1px solid #dddfe2;
-      border-radius: 6px;
-      font-size: 17px;
-      color: #1d2129;
-    }
+        input[type="text"] {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
 
-    .login-card input:focus {
-      outline: none;
-      border-color: #1877f2;
-      box-shadow: 0 0 0 2px #e7f3ff;
-    }
+        input[type="text"]:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+        }
 
-    .login-btn {
-      background-color: #1877f2;
-      color: white;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 4px;
-    }
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(to right, #ff6b6b, #ee5a24);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-    .login-btn:hover {
-      background-color: #166fe5;
-    }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(238, 90, 36, 0.3);
+        }
 
-    .forgot {
-      display: block;
-      margin: 16px 0;
-      color: #1877f2;
-      font-size: 14px;
-      text-decoration: none;
-    }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-    .forgot:hover {
-      text-decoration: underline;
-    }
+        .status {
+            margin-top: 25px;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
 
-    .divider {
-      border-bottom: 1px solid #dadde1;
-      margin: 20px 16px;
-    }
+        .status.loading {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: block;
+        }
 
-    .create-btn {
-      background-color: #42b72a;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 17px;
-      font-weight: bold;
-      padding: 12px 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+        .status.success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: block;
+        }
 
-    .create-btn:hover {
-      background-color: #36a420;
-    }
+        .status.error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: block;
+        }
 
-    .create-page {
-      margin-top: 28px;
-      font-size: 14px;
-      color: #1c1e21;
-    }
+        .clips-list {
+            margin-top: 25px;
+            display: none;
+        }
 
-    .create-page a {
-      color: #1c1e21;
-      font-weight: bold;
-      text-decoration: none;
-    }
+        .clip-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .create-page a:hover {
-      text-decoration: underline;
-    }
+        .clip-item a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-      }
+        .loader {
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
 
-      .left h1 {
-        font-size: 48px;
-      }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-      .left p {
-        font-size: 20px;
-      }
-
-      .login-card {
-        width: 100%;
-        max-width: 396px;
-      }
-    }
-  </style>
+        .note {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Left content -->
-    <div class="left">
-      <h1>facebook</h1>
-      <p>Connect with friends and the world around you on Facebook.</p>
+    <div class="container">
+        <h1>YouTube Clip Maker</h1>
+        <p class="subtitle">Link paste karo → Automatic 30 second clips</p>
+
+        <div class="input-group">
+            <label>YouTube Video Link</label>
+            <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+
+        <button id="processBtn" onclick="processVideo()">
+            <span id="btnText">Clips Banao</span>
+            <div id="loader" class="loader" style="display: none;"></div>
+        </button>
+
+        <div id="status" class="status"></div>
+
+        <div id="clipsList" class="clips-list">
+            <h3 style="margin-bottom: 15px;">Generated Clips:</h3>
+            <div id="clipsContainer"></div>
+        </div>
+
+        <p class="note">
+            Note: Yeh frontend hai. Actual processing ke liye backend (Flask) chalana zaroori hai.
+        </p>
     </div>
 
-    <!-- Login form -->
-    <div>
-      <div class="login-card">
-        <form>
-          <input type="text" placeholder="Email or phone number" required>
-          <input type="password" placeholder="Password" required>
-          <button type="submit" class="login-btn">Log In</button>
-        </form>
+    <script>
+        async function processVideo() {
+            const url = document.getElementById('youtubeUrl').value.trim();
+            const btn = document.getElementById('processBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('loader');
+            const status = document.getElementById('status');
+            const clipsList = document.getElementById('clipsList');
+            const clipsContainer = document.getElementById('clipsContainer');
 
-        <a href="#" class="forgot">Forgotten password?</a>
+            if (!url) {
+                showStatus('Pehle YouTube link paste karo!', 'error');
+                return;
+            }
 
-        <div class="divider"></div>
+            // UI update
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            loader.style.display = 'block';
+            status.className = 'status loading';
+            status.innerHTML = 'Video process ho raha hai... thoda time lag sakta hai';
+            clipsList.style.display = 'none';
 
-        <button class="create-btn">Create new account</button>
-      </div>
+            try {
+                // Backend API call (Flask server pe chalana hoga)
+                const response = await fetch('http://localhost:5000/process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
 
-      <p class="create-page">
-        <a href="#">Create a Page</a> for a celebrity, brand or business.
-      </p>
-    </div>
-  </div>
+                const data = await response.json();
+
+                if (data.success) {
+                    showStatus(`✅ ${data.clips.length} clips successfully ban gaye!`, 'success');
+                    
+                    clipsContainer.innerHTML = '';
+                    data.clips.forEach((clip, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'clip-item';
+                        div.innerHTML = `
+                            <span>Clip ${index + 1}</span>
+                            <a href="${clip}" download>Download</a>
+                        `;
+                        clipsContainer.appendChild(div);
+                    });
+                    clipsList.style.display = 'block';
+                } else {
+                    showStatus(data.error || 'Kuch error aa gaya', 'error');
+                }
+            } catch (err) {
+                showStatus('Backend server nahi chal raha. Pehle Flask server start karo!', 'error');
+            }
+
+            // Reset button
+            btn.disabled = false;
+            btnText.style.display = 'inline';
+            loader.style.display = 'none';
+        }
+
+        function showStatus(msg, type) {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = msg;
+        }
+    </script>
 </body>
 </html>
