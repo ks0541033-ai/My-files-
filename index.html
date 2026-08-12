@@ -1,271 +1,532 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube 30-Sec Clip Maker</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBERHACK // GAME EXPLOITS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+:root {
+  --neon: #00ff41;
+  --neon-dim: #00cc33;
+  --bg: #0a0a0a;
+  --card: #111;
+  --danger: #ff003c;
+}
 
-        .container {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 40px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        h1 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 8px;
-            background: linear-gradient(to right, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+body {
+  background: var(--bg);
+  color: var(--neon);
+  font-family: 'Share Tech Mono', monospace;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-        .subtitle {
-            text-align: center;
-            color: #a0aec0;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-        }
+/* Digital rain canvas */
+#rain {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+}
 
-        .input-group {
-            margin-bottom: 25px;
-        }
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.85);
+  border-bottom: 1px solid var(--neon);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #e2e8f0;
-        }
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--neon);
+}
 
-        input[type="text"] {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 14px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s;
-        }
+.logo span { color: var(--danger); }
 
-        input[type="text"]:focus {
-            border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
-        }
+.nav-links a {
+  color: var(--neon);
+  text-decoration: none;
+  margin-left: 1.8rem;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  position: relative;
+}
 
-        button {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(to right, #ff6b6b, #ee5a24);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+.nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon);
+}
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(238, 90, 36, 0.3);
-        }
+/* Hero */
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-shadow: 0 0 20px var(--neon), 0 0 40px var(--neon);
+  margin-bottom: 1rem;
+  animation: glitch 3s infinite;
+}
 
-        .status {
-            margin-top: 25px;
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            display: none;
-        }
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
 
-        .status.loading {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            display: block;
-        }
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  border: 2px solid var(--neon);
+  color: var(--neon);
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
 
-        .status.success {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            display: block;
-        }
+.btn:hover {
+  background: var(--neon);
+  color: #000;
+  box-shadow: 0 0 25px var(--neon);
+}
 
-        .status.error {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            display: block;
-        }
+/* Sections */
+section {
+  padding: 4rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
 
-        .clips-list {
-            margin-top: 25px;
-            display: none;
-        }
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 4px;
+  position: relative;
+}
 
-        .clip-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 14px 18px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--neon);
+  margin: 0.8rem auto 0;
+  box-shadow: 0 0 10px var(--neon);
+}
 
-        .clip-item a {
-            color: #60a5fa;
-            text-decoration: none;
-            font-weight: 500;
-        }
+/* Game grid */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
 
-        .loader {
-            width: 22px;
-            height: 22px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-        }
+.game-card {
+  background: var(--card);
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.35s;
+  position: relative;
+}
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+.game-card:hover {
+  border-color: var(--neon);
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(0,255,65,0.25);
+}
 
-        .note {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            text-align: center;
-            line-height: 1.5;
-        }
-    </style>
+.game-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+}
+
+.game-card .content {
+  padding: 1.4rem;
+}
+
+.game-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.game-card p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 1.2rem;
+}
+
+/* Product / Hack cards */
+.hack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+}
+
+.hack-card {
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.hack-card:hover {
+  border-color: var(--neon);
+  box-shadow: 0 0 25px rgba(0,255,65,0.2);
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  background: #000;
+}
+
+.video-wrapper iframe,
+.video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.hack-info {
+  padding: 1.5rem;
+}
+
+.hack-info h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  color: var(--neon);
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0.8rem 0;
+}
+
+.price span {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tag {
+  background: rgba(0,255,65,0.1);
+  border: 1px solid var(--neon-dim);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+}
+
+/* Terminal / Profile section */
+.terminal {
+  background: #050505;
+  border: 1px solid var(--neon);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0,255,65,0.15);
+}
+
+.terminal .prompt { color: var(--neon); }
+.terminal .cmd { color: #fff; }
+.terminal .output { color: #aaa; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2.5rem;
+  border-top: 1px solid #1a1a1a;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-top: 3rem;
+}
+
+/* Glitch animation */
+@keyframes glitch {
+  0%, 90%, 100% { transform: none; text-shadow: 0 0 20px var(--neon); }
+  92% { transform: translate(-2px, 1px); text-shadow: -2px 0 #ff003c, 2px 0 var(--neon); }
+  94% { transform: translate(2px, -1px); text-shadow: 2px 0 #ff003c, -2px 0 var(--neon); }
+  96% { transform: translate(-1px, 2px); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hack-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>YouTube Clip Maker</h1>
-        <p class="subtitle">Link paste karo → Automatic 30 second clips</p>
 
-        <div class="input-group">
-            <label>YouTube Video Link</label>
-            <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+<canvas id="rain"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CYBER<span>HACK</span></div>
+  <div class="nav-links">
+    <a href="#home">HOME</a>
+    <a href="#games">GAMES</a>
+    <a href="#hacks">HACKS</a>
+    <a href="#profile">PROFILE</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1>CYBERHACK</h1>
+  <p>Elite game exploits • Undetected • Instant delivery<br>
+     <span style="color:#00ff41">[ SYSTEM ONLINE ]</span></p>
+  <a href="#hacks" class="btn">BROWSE EXPLOITS</a>
+</section>
+
+<!-- GAMES SECTION -->
+<section id="games">
+  <h2 class="section-title">SELECT GAME</h2>
+  <div class="games-grid">
+    <div class="game-card">
+      <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=300&fit=crop" alt="PUBG">
+      <div class="content">
+        <h3>PUBG MOBILE</h3>
+        <p>ESP • Aimbot • Speed • Magisk modules</p>
+        <a href="#hacks" class="btn" style="padding:0.5rem 1.2rem;font-size:0.8rem;">VIEW HACKS</a>
+      </div>
+    </div>
+    <div class="game-card">
+      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=300&fit=crop" alt="Free Fire">
+      <div class="content">
+        <h3>FREE FIRE</h3>
+        <p>Auto headshot • Wallhack • Fly hack</p>
+        <a href="#hacks" class="btn" style="padding:0.5rem 1.2rem;font-size:0.8rem;">VIEW HACKS</a>
+      </div>
+    </div>
+    <div class="game-card">
+      <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600&h=300&fit=crop" alt="Valorant">
+      <div class="content">
+        <h3>VALORANT</h3>
+        <p>Triggerbot • Radar • Skin changer</p>
+        <a href="#hacks" class="btn" style="padding:0.5rem 1.2rem;font-size:0.8rem;">VIEW HACKS</a>
+      </div>
+    </div>
+    <div class="game-card">
+      <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600&h=300&fit=crop" alt="GTA">
+      <div class="content">
+        <h3>GTA V / FIVEM</h3>
+        <p>Money drop • Godmode • Vehicle spawner</p>
+        <a href="#hacks" class="btn" style="padding:0.5rem 1.2rem;font-size:0.8rem;">VIEW HACKS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HACKS / PRODUCTS -->
+<section id="hacks">
+  <h2 class="section-title">AVAILABLE EXPLOITS</h2>
+  <div class="hack-grid">
+
+    <!-- HACK 1 -->
+    <div class="hack-card">
+      <div class="video-wrapper">
+        <!-- Replace src with your YouTube embed or video URL -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="hack-info">
+        <h3>PUBG // ESP + AIMBOT v9.4</h3>
+        <div class="tags">
+          <span class="tag">UNDETECTED</span>
+          <span class="tag">ANDROID</span>
+          <span class="tag">IOS</span>
         </div>
-
-        <button id="processBtn" onclick="processVideo()">
-            <span id="btnText">Clips Banao</span>
-            <div id="loader" class="loader" style="display: none;"></div>
-        </button>
-
-        <div id="status" class="status"></div>
-
-        <div id="clipsList" class="clips-list">
-            <h3 style="margin-bottom: 15px;">Generated Clips:</h3>
-            <div id="clipsContainer"></div>
-        </div>
-
-        <p class="note">
-            Note: Yeh frontend hai. Actual processing ke liye backend (Flask) chalana zaroori hai.
+        <p style="opacity:0.75;font-size:0.9rem;margin:0.8rem 0;">
+          Full wallhack, smooth aimbot, no recoil, speed hack. Updated for latest version.
         </p>
+        <div class="price">₹899 <span>₹1499</span></div>
+        <button class="btn" onclick="alert('Order system ready — connect payment gateway')">BUY NOW</button>
+      </div>
     </div>
 
-    <script>
-        async function processVideo() {
-            const url = document.getElementById('youtubeUrl').value.trim();
-            const btn = document.getElementById('processBtn');
-            const btnText = document.getElementById('btnText');
-            const loader = document.getElementById('loader');
-            const status = document.getElementById('status');
-            const clipsList = document.getElementById('clipsList');
-            const clipsContainer = document.getElementById('clipsContainer');
+    <!-- HACK 2 -->
+    <div class="hack-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="hack-info">
+        <h3>FREE FIRE // HEADSHOT + FLY</h3>
+        <div class="tags">
+          <span class="tag">SAFE</span>
+          <span class="tag">ANDROID</span>
+        </div>
+        <p style="opacity:0.75;font-size:0.9rem;margin:0.8rem 0;">
+          Auto headshot, fly mode, unlimited diamonds (temporary), anti-ban.
+        </p>
+        <div class="price">₹599 <span>₹999</span></div>
+        <button class="btn" onclick="alert('Order system ready — connect payment gateway')">BUY NOW</button>
+      </div>
+    </div>
 
-            if (!url) {
-                showStatus('Pehle YouTube link paste karo!', 'error');
-                return;
-            }
+    <!-- HACK 3 -->
+    <div class="hack-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="hack-info">
+        <h3>VALORANT // RADAR + TRIGGER</h3>
+        <div class="tags">
+          <span class="tag">PC</span>
+          <span class="tag">STREAM PROOF</span>
+        </div>
+        <p style="opacity:0.75;font-size:0.9rem;margin:0.8rem 0;">
+          External radar, triggerbot, no recoil, skin changer. Low ban risk.
+        </p>
+        <div class="price">₹1299 <span>₹1999</span></div>
+        <button class="btn" onclick="alert('Order system ready — connect payment gateway')">BUY NOW</button>
+      </div>
+    </div>
 
-            // UI update
-            btn.disabled = true;
-            btnText.style.display = 'none';
-            loader.style.display = 'block';
-            status.className = 'status loading';
-            status.innerHTML = 'Video process ho raha hai... thoda time lag sakta hai';
-            clipsList.style.display = 'none';
+    <!-- HACK 4 -->
+    <div class="hack-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="hack-info">
+        <h3>GTA V // MONEY + GODMODE</h3>
+        <div class="tags">
+          <span class="tag">FIVEM</span>
+          <span class="tag">STORY MODE</span>
+        </div>
+        <p style="opacity:0.75;font-size:0.9rem;margin:0.8rem 0;">
+          Instant money, godmode, vehicle spawn, teleport, mod menu.
+        </p>
+        <div class="price">₹799 <span>₹1299</span></div>
+        <button class="btn" onclick="alert('Order system ready — connect payment gateway')">BUY NOW</button>
+      </div>
+    </div>
 
-            try {
-                // Backend API call (Flask server pe chalana hoga)
-                const response = await fetch('http://localhost:5000/process', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url: url })
-                });
+  </div>
+</section>
 
-                const data = await response.json();
+<!-- PROFILE / TERMINAL -->
+<section id="profile">
+  <h2 class="section-title">SYSTEM PROFILE</h2>
+  <div class="terminal">
+    <div><span class="prompt">root@cyberhack:\~$</span> <span class="cmd">whoami</span></div>
+    <div class="output">elite_hacker // game exploit specialist</div>
+    <br>
+    <div><span class="prompt">root@cyberhack:\~$</span> <span class="cmd">uptime</span></div>
+    <div class="output">online since 2019 • 4,218 successful deliveries</div>
+    <br>
+    <div><span class="prompt">root@cyberhack:\~$</span> <span class="cmd">status</span></div>
+    <div class="output">
+      [✓] Anti-ban systems active<br>
+      [✓] 24/7 support channel<br>
+      [✓] Instant download after payment<br>
+      [✓] Video proof for every product
+    </div>
+    <br>
+    <div><span class="prompt">root@cyberhack:\~$</span> <span class="cmd">echo "Stay undetected."</span></div>
+    <div class="output">Stay undetected.</div>
+  </div>
+</section>
 
-                if (data.success) {
-                    showStatus(`✅ ${data.clips.length} clips successfully ban gaye!`, 'success');
-                    
-                    clipsContainer.innerHTML = '';
-                    data.clips.forEach((clip, index) => {
-                        const div = document.createElement('div');
-                        div.className = 'clip-item';
-                        div.innerHTML = `
-                            <span>Clip ${index + 1}</span>
-                            <a href="${clip}" download>Download</a>
-                        `;
-                        clipsContainer.appendChild(div);
-                    });
-                    clipsList.style.display = 'block';
-                } else {
-                    showStatus(data.error || 'Kuch error aa gaya', 'error');
-                }
-            } catch (err) {
-                showStatus('Backend server nahi chal raha. Pehle Flask server start karo!', 'error');
-            }
+<!-- CONTACT -->
+<section id="contact" style="text-align:center;">
+  <h2 class="section-title">SECURE CHANNEL</h2>
+  <p style="margin-bottom:1.5rem;opacity:0.8;">Telegram / Discord / WhatsApp — replace with your real links</p>
+  <a href="#" class="btn">JOIN TELEGRAM</a>
+  <a href="#" class="btn" style="margin-left:1rem;">DISCORD</a>
+</section>
 
-            // Reset button
-            btn.disabled = false;
-            btnText.style.display = 'inline';
-            loader.style.display = 'none';
-        }
+<footer>
+  © 2026 CYBERHACK // All exploits are for educational purposes only.<br>
+  Use at your own risk. We are not responsible for bans.
+</footer>
 
-        function showStatus(msg, type) {
-            const status = document.getElementById('status');
-            status.className = `status ${type}`;
-            status.innerHTML = msg;
-        }
-    </script>
+<script>
+// Digital rain effect
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw() {
+  ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff41';
+  ctx.font = fontSize + 'px monospace';
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 33);
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
 </body>
 </html>
