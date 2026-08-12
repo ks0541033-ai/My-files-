@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CYBERHACK // GAME EXPLOITS</title>
+<title>CYBERHACK // SECURE ACCESS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
@@ -25,13 +25,137 @@ body {
   min-height: 100vh;
 }
 
-/* Digital rain canvas */
 #rain {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: -1;
   opacity: 0.15;
+}
+
+/* ========== LOGIN PAGE ========== */
+#login-page {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.login-box {
+  background: #0a0a0a;
+  border: 1px solid var(--neon);
+  border-radius: 12px;
+  padding: 2.5rem 2.8rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 0 40px rgba(0,255,65,0.25);
+  position: relative;
+}
+
+.login-box::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: 14px;
+  background: linear-gradient(45deg, var(--neon), transparent, var(--neon));
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.login-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 4px;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 15px var(--neon);
+}
+
+.login-subtitle {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.input-group {
+  margin-bottom: 1.4rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 6px;
+  color: var(--neon);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 12px rgba(0,255,65,0.3);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.8rem;
+  background: transparent;
+  border: 2px solid var(--neon);
+  color: var(--neon);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 6px;
+}
+
+.login-btn:hover {
+  background: var(--neon);
+  color: #000;
+  box-shadow: 0 0 25px var(--neon);
+}
+
+.error-msg {
+  color: var(--danger);
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  display: none;
+  text-shadow: 0 0 8px var(--danger);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.8rem;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+/* ========== MAIN SITE (hidden initially) ========== */
+#main-site {
+  display: none;
 }
 
 /* Navbar */
@@ -64,12 +188,28 @@ nav {
   margin-left: 1.8rem;
   font-size: 0.95rem;
   transition: 0.3s;
-  position: relative;
 }
 
 .nav-links a:hover {
   color: #fff;
   text-shadow: 0 0 8px var(--neon);
+}
+
+.logout-btn {
+  margin-left: 1.8rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  background: transparent;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: var(--danger);
+  color: #000;
 }
 
 /* Hero */
@@ -81,7 +221,6 @@ nav {
   align-items: center;
   text-align: center;
   padding: 2rem;
-  position: relative;
 }
 
 .hero h1 {
@@ -113,8 +252,6 @@ nav {
   transition: 0.3s;
   background: transparent;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
 
 .btn:hover {
@@ -123,7 +260,6 @@ nav {
   box-shadow: 0 0 25px var(--neon);
 }
 
-/* Sections */
 section {
   padding: 4rem 2rem;
   max-width: 1300px;
@@ -136,7 +272,6 @@ section {
   margin-bottom: 2.5rem;
   text-align: center;
   letter-spacing: 4px;
-  position: relative;
 }
 
 .section-title::after {
@@ -149,7 +284,6 @@ section {
   box-shadow: 0 0 10px var(--neon);
 }
 
-/* Game grid */
 .games-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -162,7 +296,6 @@ section {
   border-radius: 8px;
   overflow: hidden;
   transition: 0.35s;
-  position: relative;
 }
 
 .game-card:hover {
@@ -194,7 +327,6 @@ section {
   margin-bottom: 1.2rem;
 }
 
-/* Product / Hack cards */
 .hack-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -216,13 +348,12 @@ section {
 
 .video-wrapper {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
   height: 0;
   background: #000;
 }
 
-.video-wrapper iframe,
-.video-wrapper video {
+.video-wrapper iframe {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -269,7 +400,6 @@ section {
   border-radius: 4px;
 }
 
-/* Terminal / Profile section */
 .terminal {
   background: #050505;
   border: 1px solid var(--neon);
@@ -286,7 +416,6 @@ section {
 .terminal .cmd { color: #fff; }
 .terminal .output { color: #aaa; }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 2.5rem;
@@ -296,7 +425,6 @@ footer {
   margin-top: 3rem;
 }
 
-/* Glitch animation */
 @keyframes glitch {
   0%, 90%, 100% { transform: none; text-shadow: 0 0 20px var(--neon); }
   92% { transform: translate(-2px, 1px); text-shadow: -2px 0 #ff003c, 2px 0 var(--neon); }
@@ -304,10 +432,10 @@ footer {
   96% { transform: translate(-1px, 2px); }
 }
 
-/* Responsive */
 @media (max-width: 600px) {
-  .nav-links { display: none; }
+  .nav-links a { margin-left: 1rem; font-size: 0.85rem; }
   .hack-grid { grid-template-columns: 1fr; }
+  .login-box { margin: 1rem; padding: 2rem 1.5rem; }
 }
 </style>
 </head>
@@ -315,7 +443,36 @@ footer {
 
 <canvas id="rain"></canvas>
 
-<!-- NAV -->
+<!-- ==================== LOGIN PAGE ==================== -->
+<div id="login-page">
+  <div class="login-box">
+    <div class="login-title">CYBERHACK</div>
+    <div class="login-subtitle">[ SECURE ACCESS REQUIRED ]</div>
+
+    <div class="input-group">
+      <label>USER ID</label>
+      <input type="text" id="username" placeholder="enter user id" autocomplete="off">
+    </div>
+
+    <div class="input-group">
+      <label>PASSWORD</label>
+      <input type="password" id="password" placeholder="enter password">
+    </div>
+
+    <button class="login-btn" onclick="checkLogin()">ACCESS SYSTEM</button>
+
+    <div class="error-msg" id="error-msg">Invalid Pass</div>
+
+    <div class="login-footer">
+      AUTHORIZED PERSONNEL ONLY<br>
+      Unauthorized access is monitored
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MAIN WEBSITE ==================== -->
+<div id="main-site">
+
 <nav>
   <div class="logo">CYBER<span>HACK</span></div>
   <div class="nav-links">
@@ -324,10 +481,10 @@ footer {
     <a href="#hacks">HACKS</a>
     <a href="#profile">PROFILE</a>
     <a href="#contact">CONTACT</a>
+    <button class="logout-btn" onclick="logout()">LOGOUT</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <h1>CYBERHACK</h1>
   <p>Elite game exploits • Undetected • Instant delivery<br>
@@ -335,7 +492,6 @@ footer {
   <a href="#hacks" class="btn">BROWSE EXPLOITS</a>
 </section>
 
-<!-- GAMES SECTION -->
 <section id="games">
   <h2 class="section-title">SELECT GAME</h2>
   <div class="games-grid">
@@ -374,15 +530,12 @@ footer {
   </div>
 </section>
 
-<!-- HACKS / PRODUCTS -->
 <section id="hacks">
   <h2 class="section-title">AVAILABLE EXPLOITS</h2>
   <div class="hack-grid">
 
-    <!-- HACK 1 -->
     <div class="hack-card">
       <div class="video-wrapper">
-        <!-- Replace src with your YouTube embed or video URL -->
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
       </div>
       <div class="hack-info">
@@ -400,7 +553,6 @@ footer {
       </div>
     </div>
 
-    <!-- HACK 2 -->
     <div class="hack-card">
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -419,7 +571,6 @@ footer {
       </div>
     </div>
 
-    <!-- HACK 3 -->
     <div class="hack-card">
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -438,7 +589,6 @@ footer {
       </div>
     </div>
 
-    <!-- HACK 4 -->
     <div class="hack-card">
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
@@ -460,7 +610,6 @@ footer {
   </div>
 </section>
 
-<!-- PROFILE / TERMINAL -->
 <section id="profile">
   <h2 class="section-title">SYSTEM PROFILE</h2>
   <div class="terminal">
@@ -483,7 +632,6 @@ footer {
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" style="text-align:center;">
   <h2 class="section-title">SECURE CHANNEL</h2>
   <p style="margin-bottom:1.5rem;opacity:0.8;">Telegram / Discord / WhatsApp — replace with your real links</p>
@@ -496,8 +644,63 @@ footer {
   Use at your own risk. We are not responsible for bans.
 </footer>
 
+</div> <!-- end main-site -->
+
 <script>
-// Digital rain effect
+// ========== LOGIN LOGIC ==========
+const correctUser = "ogsandhu";
+const correctPass = "hacks4u";
+
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value;
+  const errorMsg = document.getElementById("error-msg");
+
+  if (user === correctUser && pass === correctPass) {
+    // Success
+    errorMsg.style.display = "none";
+    document.getElementById("login-page").style.display = "none";
+    document.getElementById("main-site").style.display = "block";
+    
+    // Optional: save login state
+    sessionStorage.setItem("loggedIn", "true");
+  } else {
+    // Fail
+    errorMsg.style.display = "block";
+    errorMsg.innerText = "Invalid Pass";
+    
+    // Clear password field
+    document.getElementById("password").value = "";
+    document.getElementById("password").focus();
+  }
+}
+
+// Allow Enter key to login
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && document.getElementById("login-page").style.display !== "none") {
+    checkLogin();
+  }
+});
+
+// Logout
+function logout() {
+  sessionStorage.removeItem("loggedIn");
+  document.getElementById("main-site").style.display = "none";
+  document.getElementById("login-page").style.display = "flex";
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("error-msg").style.display = "none";
+}
+
+// Check if already logged in (page refresh)
+window.onload = function() {
+  if (sessionStorage.getItem("loggedIn") === "true") {
+    document.getElementById("login-page").style.display = "none";
+    document.getElementById("main-site").style.display = "block";
+  }
+};
+
+// ========== DIGITAL RAIN ==========
 const canvas = document.getElementById('rain');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
