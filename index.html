@@ -33,7 +33,6 @@
     padding: 20px;
   }
 
-  /* Fake background elements */
   .bg-plane {
     position: absolute;
     top: 12%;
@@ -297,10 +296,6 @@
     box-shadow: 0 4px 15px rgba(255,107,0,0.35);
   }
 
-  /* Reset Key Section */
-  .reset-section {
-    margin-top: 8px;
-  }
   .reset-section h3 {
     font-size: 15px;
     margin-bottom: 12px;
@@ -325,7 +320,6 @@
     font-size: 14px;
   }
 
-  /* Stats */
   .stats {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -350,7 +344,6 @@
     margin-top: 4px;
   }
 
-  /* Quick Actions */
   .quick h3 {
     font-size: 15px;
     margin-bottom: 10px;
@@ -375,7 +368,6 @@
     border: 1.5px solid #e0e0e0;
   }
 
-  /* Bottom Nav */
   .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -413,7 +405,6 @@
     color: white;
   }
 
-  /* Toast */
   .toast {
     position: fixed;
     top: 20px;
@@ -475,33 +466,33 @@
       <div class="balance">Balance: <span>1950 Rs</span></div>
 
       <label>Product</label>
-      <select class="select-box" id="productSelect">
-        <option>Select product</option>
-        <option>Rage Cheat (Aimbot)</option>
-        <option>King iOS</option>
-        <option>King mod</option>
-        <option>Shield Cheat</option>
-        <option>Titan root</option>
-        <option>Vision - API</option>
-        <option>Obsidian Cheat</option>
-        <option>Lethal - API</option>
+      <select class="select-box" id="productSelect" onchange="updateCost()">
+        <option value="">Select product</option>
+        <option value="kingios">King iOS</option>
+        <option value="rage">Rage Cheat (Aimbot)</option>
+        <option value="kingmod">King mod</option>
+        <option value="shield">Shield Cheat</option>
+        <option value="titan">Titan root</option>
+        <option value="vision">Vision - API</option>
+        <option value="obsidian">Obsidian Cheat</option>
+        <option value="lethal">Lethal - API</option>
       </select>
 
       <label>Duration</label>
-      <select class="select-box" id="durationSelect">
-        <option>Select duration</option>
-        <option>Day → 53 in stock</option>
-        <option>Week → 5 in stock</option>
-        <option>Trial → 10 in stock</option>
+      <select class="select-box" id="durationSelect" onchange="updateCost()">
+        <option value="">Select duration</option>
+        <option value="day">Day → 4 in stock</option>
+        <option value="week">Week → 5 in stock</option>
+        <option value="trial">Trial → 10 in stock</option>
       </select>
 
       <div class="quantity-row">
         <label>Quantity</label>
         <span id="qtyValue">1</span>
       </div>
-      <input type="range" min="1" max="10" value="1" id="qtySlider" oninput="document.getElementById('qtyValue').innerText=this.value">
+      <input type="range" min="1" max="10" value="1" id="qtySlider" oninput="document.getElementById('qtyValue').innerText=this.value; updateCost()">
 
-      <div class="cost">Cost: 50 Rs</div>
+      <div class="cost" id="costDisplay">Cost: 0 Rs</div>
 
       <button class="generate-btn" onclick="alert('UI only - no real generation')">
         ✨ Generate
@@ -537,7 +528,6 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation -->
   <div class="bottom-nav">
     <div class="nav-item active">
       <div class="icon">▦</div>
@@ -558,10 +548,37 @@
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('dashboardPage').style.display = 'block';
     
-    // Show toast like video
     const toast = document.getElementById('toast');
     toast.style.display = 'block';
     setTimeout(() => toast.style.display = 'none', 2500);
+  }
+
+  // Price logic
+  function updateCost() {
+    const product = document.getElementById('productSelect').value;
+    const duration = document.getElementById('durationSelect').value;
+    const qty = parseInt(document.getElementById('qtySlider').value) || 1;
+    let price = 0;
+
+    if (product === 'kingios') {
+      if (duration === 'day') price = 140;
+      else if (duration === 'week') price = 590;
+      else if (duration === 'trial') price = 0;
+    } 
+    else if (product === 'rage') {
+      if (duration === 'day') price = 50;
+      else if (duration === 'week') price = 0;
+      else if (duration === 'trial') price = 0;
+    }
+    else {
+      // default for other products
+      if (duration === 'day') price = 95;
+      else if (duration === 'week') price = 475;
+      else if (duration === 'trial') price = 0;
+    }
+
+    const total = price * qty;
+    document.getElementById('costDisplay').innerText = `Cost: ${total} Rs`;
   }
 </script>
 </body>
