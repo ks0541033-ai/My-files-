@@ -483,6 +483,7 @@
         <option value="">Select duration</option>
         <option value="day">Day → 4 in stock</option>
         <option value="week">Week → 5 in stock</option>
+        <option value="month">Month → 3 in stock</option>
         <option value="trial">Trial → 10 in stock</option>
       </select>
 
@@ -561,19 +562,22 @@
     let price = 0;
 
     if (product === 'kingios') {
-      if (duration === 'day') price = 140;
-      else if (duration === 'week') price = 590;
+      if (duration === 'day') price = 190;
+      else if (duration === 'week') price = 740;
+      else if (duration === 'month') price = 1490;
       else if (duration === 'trial') price = 0;
     } 
     else if (product === 'rage') {
       if (duration === 'day') price = 50;
       else if (duration === 'week') price = 0;
+      else if (duration === 'month') price = 0;
       else if (duration === 'trial') price = 0;
     }
     else {
       // default for other products
       if (duration === 'day') price = 95;
       else if (duration === 'week') price = 475;
+      else if (duration === 'month') price = 0;
       else if (duration === 'trial') price = 0;
     }
 
